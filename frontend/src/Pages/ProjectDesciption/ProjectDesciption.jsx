@@ -46,7 +46,7 @@ const ProjectDescription = () => {
     setMounted(true);
     const fetchProjects = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/v1/');
+        const response = await fetch('https://project-hub-backend-seven.vercel.app/api/v1/');
         if (!response.ok) throw new Error('Failed to fetch projects');
         const data = await response.json();
         setProjects(data.projects);
@@ -56,11 +56,11 @@ const ProjectDescription = () => {
         if (project) {
           setSelectedProject(project);
         } else {
-          navigate('/');
+          navigate('/home');
         }
       } catch (error) {
         console.error('Error fetching projects:', error);
-        navigate('/');
+        navigate('/home');
       }
     };
 
@@ -97,7 +97,7 @@ const ProjectDescription = () => {
           
           {/* Back Button */}
           <Link
-            to="/"
+            to="/home"
             className="inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors mb-8"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />

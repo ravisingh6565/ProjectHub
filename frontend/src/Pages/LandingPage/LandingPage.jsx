@@ -190,7 +190,7 @@ const LandingPage = () => {
             >
               Get Started
             </Button> */}
-           <Link to="/"> <Button 
+           <Link to="/home"> <Button 
               variant="outlined" 
               className="border-purple-400 text-purple-400 hover:bg-purple-400/10 px-8 py-3
                 transform hover:scale-105 transition-all duration-300"
@@ -200,7 +200,7 @@ const LandingPage = () => {
             </Link>
           </div>
         </div>
-       <Link to="/"> <ScrollIndicator /></Link>
+       <Link to="/home"> <ScrollIndicator /></Link>
       </div>
     </div>
   );

@@ -86,14 +86,16 @@ const CreateProject = () => {
     });
 
     try {
-      const response = await fetch('http://localhost:5000/api/v1/add-project', {
+      // const response = fetch(`https://project-hub-backend-seven.vercel.app/api/v1/add-project`);
+
+      const response = await fetch('https://project-hub-backend-seven.vercel.app/api/v1/add-project', {
         method: 'POST',
         body: formDataToSend,
       });
 
       if (response.ok) {
         alert('Project created successfully!');
-        window.location.href = '/';
+        window.location.href = '/home';
       } else {
         alert('Failed to create project. Please try again.');
       }

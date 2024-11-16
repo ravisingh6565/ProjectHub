@@ -20,7 +20,8 @@ const Profile = () => {
     const fetchUserData = async () => {
       try {
         const userId = localStorage.getItem('userId'); // Assuming user ID is stored in local storage
-        const response = await fetch(`http://localhost:5000/api/v1/users/${userId}`); // Adjust endpoint as necessary
+        const response = fetch(`https://project-hub-backend-seven.vercel.app/api/v1/users/${userId}`);
+        // const response = await fetch(`http://localhost:5000/api/v1/users/${userId}`); // Adjust endpoint as necessary
         if (!response.ok) {
           throw new Error('Failed to fetch user data');
         }

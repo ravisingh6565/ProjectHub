@@ -71,7 +71,7 @@ const SignUp = () => {
       confirmPass: formData.confirmPassword,
     };
 
-    let response = await fetch("http://localhost:5000/api/v1/signup", {
+    let response = await fetch("https://project-hub-backend-seven.vercel.app/api/v1/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

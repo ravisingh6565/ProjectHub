@@ -16,7 +16,7 @@ function App() {
   useEffect(()=>{
     if(!localStorage.getItem('token')){
       console.log('hello world')
-      navigate('/projecthub');
+      navigate('/');
       // navigate('/login');
     }else{
       // console.log('bye')
@@ -29,7 +29,8 @@ function App() {
     <>
      <Routes>
       
-      <Route path='/' element={<Home/>}></Route>
+      <Route path='/' element={<LandingPage/>}></Route>
+      <Route path='/home' element={<Home/>}></Route>
       <Route path='/signup' element={<SignUp/>}></Route>
       <Route path='/login' element={<LogIn/>}></Route>
       <Route path='/add-project' element={<CreateProject/>}></Route>
@@ -37,7 +38,6 @@ function App() {
       <Route path='/contact' element= {<Contact/>}></Route>
       <Route path='/about' element={<About/>}></Route>
       <Route path ='/profile' element={<Profile/>}></Route>
-      <Route path='/projecthub' element={<LandingPage/>}></Route>
       <Route path='/projectDescription/:id' element={<ProjectDesciption/>}></Route>
      </Routes>
    

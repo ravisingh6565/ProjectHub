@@ -37,7 +37,7 @@ const LogIn = () => {
     setLoginData(data);
     
     try {
-      let response = await fetch('http://localhost:5000/api/v1/login', {
+      let response = await fetch('https://project-hub-backend-seven.vercel.app/api/v1/login', {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -51,7 +51,7 @@ const LogIn = () => {
         alert(response.message);
       } else {
         localStorage.setItem('token', response.token);
-        navigate('/');
+        navigate('/home');
       }
     } catch (error) {
       console.error('Login error:', error);

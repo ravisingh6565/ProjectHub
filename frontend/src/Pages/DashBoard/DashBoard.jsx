@@ -73,7 +73,7 @@ const DashBoard = () => {
     setMounted(true);
     const fetchProjects = async () => {
       try {
-        const response = await fetch('http://localhost:5000/api/v1/');
+        const response = await fetch('https://project-hub-backend-seven.vercel.app/api/v1/');
         if (!response.ok) throw new Error('Failed to fetch projects');
         const data = await response.json();
         const projectsData = data.projects || data;
@@ -103,7 +103,8 @@ const DashBoard = () => {
 
   const handleDelete = async (projectId) => {
     try {
-      const response = await fetch(`http://localhost:5000/api/v1/projects/${projectId}`, {
+      //https://project-hub-backend-seven.vercel.app/api/v1/
+      const response = await fetch(`https://project-hub-backend-seven.vercel.app/api/v1/projects/${projectId}`, {
         method: 'DELETE',
       });
       if (!response.ok) throw new Error('Failed to delete project');

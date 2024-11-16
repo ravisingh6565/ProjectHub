@@ -53,7 +53,7 @@ export default function Navbar() {
   };
 
   const navLinks = [
-    { name: 'Home', path: '/' },
+    { name: 'Home', path: '/home' },
     { name: 'Dashboard', path: '/dashboard' },
     { name: 'Contact', path: '/contact' },
     { name: 'About', path: '/about' },
