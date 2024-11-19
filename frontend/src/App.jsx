@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react'
-import { Routes, Route, useNavigate, RouterProvider, createBrowserRouter} from 'react-router-dom'
+import { Routes, Route, useNavigate} from 'react-router-dom'
 import Home from './Pages/Home/Home'
 import SignUp from './Pages/SignUp/SignUp'
 import LogIn from './Pages/LogIn/LogIn'
@@ -9,50 +9,8 @@ import Contact from "./Pages/Contact/Contact";
 import About from "./Pages/About/About";
 import Profile from './Component/Profile'
 import LandingPage from './Pages/LandingPage/LandingPage'
-import ProjectDescription from './Pages/ProjectDesciption/ProjectDesciption'
+import ProjectDesciption from './Pages/ProjectDesciption/ProjectDesciption'
 
-const router = createBrowserRouter([
-  {
-    path: "/",
-    element: <LandingPage />,
-  },
-  {
-    path: "/home",
-    element: <Home />,
-  },
-  {
-    path: "/signup",
-    element: <SignUp />,
-  },
-  {
-    path: "/login",
-    element: <LogIn />,
-  },
-  {
-    path: "/add-project",
-    element: <CreateProject />,
-  },
-  {
-    path: "/dashboard",
-    element: <DashBoard />,
-  },
-  {
-    path: "/contact",
-    element: <Contact />,
-  },
-  {
-    path: "/about",
-    element: <About />,
-  },
-  {
-    path: "/profile",
-    element: <Profile />,
-  },
-  {
-    path: "/projectDescription/:id",
-    element: <ProjectDescription />,
-  },
-]);
 
 function App() {
   const navigate = useNavigate();
@@ -70,7 +28,7 @@ function App() {
 
   return (
     <>
-     {/* <Routes>
+     <Routes>
       
       <Route path='/' element={<LandingPage/>}></Route>
       <Route path='/home' element={<Home/>}></Route>
@@ -82,10 +40,7 @@ function App() {
       <Route path='/about' element={<About/>}></Route>
       <Route path ='/profile' element={<Profile/>}></Route>
       <Route path='/projectDescription/:id' element={<ProjectDesciption/>}></Route>
-     </Routes> */}
-     <div className="App">
-      <RouterProvider router={router}></RouterProvider>
-    </div>
+     </Routes>
    
     </>
   )
