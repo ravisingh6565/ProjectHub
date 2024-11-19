@@ -36,6 +36,8 @@ const signupController = async (req,res)=>{
 
 const loginController = async (req,res)=>{
     try {
+        console.log("hello in login controller");
+        
         const data =req.body;
         const user = await User.findOne({email:data.email});
         if(user){
