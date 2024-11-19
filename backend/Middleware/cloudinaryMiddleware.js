@@ -22,13 +22,13 @@ const uploadImageToCloudinary = async (req, res, next) => {
         const result = await cloudinary.uploader.upload_stream({
             folder: 'projectHub_images'
         }, (error, result) => {
+            console.log(result);
             if (error) { 
                 return res.status(500).json({
                     success: false,
                     message: `Image upload failed!!! error: ${error.message}`,
                 });
             }
-            console.log(result);
             req.body.image = result.secure_url;
             next(); // Proceed to the next middleware or route handler
         }).end(req.file.buffer); // Pass the file buffer to Cloudinary
