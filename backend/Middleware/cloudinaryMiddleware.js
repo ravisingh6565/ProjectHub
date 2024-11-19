@@ -22,10 +22,10 @@ const uploadImageToCloudinary = async (req, res, next) => {
         const result = await cloudinary.uploader.upload_stream({
             folder: 'projectHub_images'
         }, (error, result) => {
-            if (error) {
+            if (error) { 
                 return res.status(500).json({
                     success: false,
-                    message: 'Image upload failed',
+                    message: 'Image upload failed!',
                     error: error.message
                 });
             }
@@ -36,7 +36,7 @@ const uploadImageToCloudinary = async (req, res, next) => {
         console.error(error.message);
         return res.status(500).json({
             success: false,
-            message: 'Image upload failed',
+            message: 'Image upload failed!!!',
             error: error.message
         });
     }
