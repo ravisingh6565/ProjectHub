@@ -25,8 +25,7 @@ const uploadImageToCloudinary = async (req, res, next) => {
             if (error) { 
                 return res.status(500).json({
                     success: false,
-                    message: 'Image upload failed!',
-                    error: error.message
+                    message: `Image upload failed!!! error: ${error.message}`,
                 });
             }
             req.body.image = result.secure_url;
@@ -36,8 +35,7 @@ const uploadImageToCloudinary = async (req, res, next) => {
         console.error(error.message);
         return res.status(500).json({
             success: false,
-            message: 'Image upload failed!!!',
-            error: error.message
+            message: `Image upload failed! error: ${error.message}`,
         });
     }
 };
