@@ -28,6 +28,7 @@ const uploadImageToCloudinary = async (req, res, next) => {
                     message: `Image upload failed!!! error: ${error.message}`,
                 });
             }
+            console.log(result);
             req.body.image = result.secure_url;
             next(); // Proceed to the next middleware or route handler
         }).end(req.file.buffer); // Pass the file buffer to Cloudinary
