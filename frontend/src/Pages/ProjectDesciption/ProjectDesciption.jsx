@@ -98,7 +98,7 @@ const ProjectDescription = () => {
           {/* Back Button */}
           <Link
             to="/home"
-            className="inline-flex items-center text-blue-400 hover:text-blue-300 transition-colors mb-8"
+            className="inline-flex items-center text-blue-400 hover:text-blue-i transition-colors mb-8"
           >
             <ArrowLeft className="w-4 h-4 mr-2" />
             Back to Projects

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import logo1 from '../assets/logo1.png'
 import logo2 from '../assets/logo2.png'
+import Footer from "./Footer/Footer";
 
 export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -57,7 +58,7 @@ export default function Navbar() {
     { name: 'Dashboard', path: '/dashboard' },
     { name: 'Contact', path: '/contact' },
     { name: 'About', path: '/about' },
-    { name: 'Calendar', path: '/calendar' }
+    // { name: 'Calendar', path: '/calendar' }
   ];
 
   return (
