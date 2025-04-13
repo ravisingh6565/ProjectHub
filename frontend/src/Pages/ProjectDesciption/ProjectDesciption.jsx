@@ -316,7 +316,7 @@ const ProjectDescription = () => {
             <h3>Thank you for your interest!</h3>
             <p>Payment received. Our expert team will guide you shortly.</p>
             <p className="popup-email">
-              For inquiries, contact us at: <strong>contact@example.com</strong>
+              For inquiries, contact us at: <strong>contact@nprojecthub.com</strong>
             </p>
             <button
               className="popup-button"
