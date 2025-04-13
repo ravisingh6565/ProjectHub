@@ -102,9 +102,9 @@ const ProjectDescription = () => {
       console.log('Payment successful:', response);
     },
     prefill: {
-      name: 'Your Name',
-      email: 'youremail@example.com',
-      contact: '9999999999',
+      name: 'Ravi Singh',
+      email: 'ravisuneel6262@gmail.com',
+      contact: '8808173982',
     },
     theme: {
       color: '#3399cc',
