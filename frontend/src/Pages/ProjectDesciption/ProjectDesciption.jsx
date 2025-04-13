@@ -3,7 +3,9 @@ import { useParams, Link, useNavigate } from 'react-router-dom';
 import Navbar from '../../Component/Navbar';
 import Footer from '../../Component/Footer/Footer';
 import { ArrowLeft, Calendar, User, Tag, ExternalLink, Github, Globe, Code2 } from 'lucide-react';
-
+import './projectDesciption.css'
+const key = import.meta.env.VITE_RAZORPAY_API_KEY;
+console.log("hello: "+key);
 // Keep existing GlowingOrb component
 const GlowingOrb = ({ delay = 0, color1, color2 }) => (
   <div 
@@ -41,6 +43,13 @@ const ProjectDescription = () => {
   const [mounted, setMounted] = useState(false);
   const { id } = useParams();
   const navigate = useNavigate();
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+
+
+
+
+
+
 
   useEffect(() => {
     setMounted(true);
@@ -79,8 +88,39 @@ const ProjectDescription = () => {
     );
   }
 
+ // razor pay integration 
+ const loadRazorpay = () => {
+  const options = {
+    key: 'rzp_test_DFJaRXBU8oVv1d', // 👈 Replace with your test key from Razorpay Dashboard
+    amount: 49900, // amount in paisa (i.e. ₹499.00)
+    currency: 'INR',
+    name: 'ProjectHub',
+    description: 'Guidance Session',
+    image: '/logo.png', // optional logo
+    handler: function (response) {
+      setShowSuccessPopup(true);
+      console.log('Payment successful:', response);
+    },
+    prefill: {
+      name: 'Your Name',
+      email: 'youremail@example.com',
+      contact: '9999999999',
+    },
+    theme: {
+      color: '#3399cc',
+    },
+  };
+
+  const razor = new window.Razorpay(options);
+  razor.open();
+  setShowSuccessPopup(true);
+};
+
+
   return (
+    
     <>
+    
       <Navbar />
       <div className="min-h-screen bg-slate-900">
         {/* Background Effects */}
@@ -255,7 +295,44 @@ const ProjectDescription = () => {
               </div>
             </div>
           </div>
+
+
+          <div>
+      {/* Razorpay Button */}
+      <button className="razorpay-button" onClick={loadRazorpay}>
+        Take Guidance
+      </button>
+
+      {/* Success Popup */}
+      {showSuccessPopup && (
+        <div className="popup-overlay">
+          <div className="popup">
+            <button
+              className="popup-close-btn"
+              onClick={() => setShowSuccessPopup(false)}
+            >
+              &times;
+            </button>
+            <h3>Thank you for your interest!</h3>
+            <p>Payment received. Our expert team will guide you shortly.</p>
+            <p className="popup-email">
+              For inquiries, contact us at: <strong>contact@example.com</strong>
+            </p>
+            <button
+              className="popup-button"
+              onClick={() => setShowSuccessPopup(false)}
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+
+
         </main>
+  {/* payment integrations  */}
+  
 
         <Footer />
       </div>
