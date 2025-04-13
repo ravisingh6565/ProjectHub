@@ -5,7 +5,7 @@ import Footer from '../../Component/Footer/Footer';
 import { ArrowLeft, Calendar, User, Tag, ExternalLink, Github, Globe, Code2 } from 'lucide-react';
 import './projectDesciption.css'
 const key = import.meta.env.VITE_RAZORPAY_API_KEY;
-console.log("hello: "+key);
+// console.log("hello: "+key);
 // Keep existing GlowingOrb component
 const GlowingOrb = ({ delay = 0, color1, color2 }) => (
   <div 
@@ -91,7 +91,7 @@ const ProjectDescription = () => {
  // razor pay integration 
  const loadRazorpay = () => {
   const options = {
-    key: 'rzp_test_DFJaRXBU8oVv1d', // 👈 Replace with your test key from Razorpay Dashboard
+    key: key, // 👈 Replace with your test key from Razorpay Dashboard
     amount: 49900, // amount in paisa (i.e. ₹499.00)
     currency: 'INR',
     name: 'ProjectHub',
