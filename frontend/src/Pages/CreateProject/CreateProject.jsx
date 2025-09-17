@@ -274,6 +274,7 @@ const CreateProject = () => {
                 accept="image/*"
                 onChange={handleImageChange}
                 className="mb-6"
+                required
               />
 
               <button
