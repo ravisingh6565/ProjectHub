@@ -1,522 +1,630 @@
-<style>.homepage {
+<style>.payment-page {
   min-height: 100vh;
   background: linear-gradient(135deg, #f5f7fa 0%, #e8eef3 100%);
+  padding: 40px 20px;
 }
 
-.hero-section {
-  position: relative;
-  height: 500px;
-  background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
-  background-image: url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=1600&q=80');
-  background-size: cover;
-  background-position: center;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-
-  .hero-overlay {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(135deg, rgba(26, 32, 44, 0.85) 0%, rgba(45, 55, 72, 0.75) 100%);
-  }
-
-  .hero-content {
-    position: relative;
-    z-index: 1;
-    text-align: center;
-    color: white;
-    padding: 0 20px;
-    animation: fadeInUp 1s ease-out;
-
-    .hero-title {
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      font-weight: 300;
-      letter-spacing: 0.05em;
-      margin: 0 0 1rem;
-      font-family: 'Cormorant Garamond', serif;
-      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-    }
-
-    .hero-subtitle {
-      font-size: clamp(1rem, 2vw, 1.25rem);
-      font-weight: 300;
-      letter-spacing: 0.1em;
-      margin: 0;
-      opacity: 0.95;
-      text-transform: uppercase;
-    }
-  }
-}
-
-.search-container {
-  margin-top: -80px;
-  position: relative;
-  z-index: 10;
-  padding: 0 20px;
-
-  .search-wrapper {
-    max-width: 1200px;
-    margin: 0 auto;
-    background: white;
-    border-radius: 16px;
-    padding: 40px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
-
-    .search-title {
-      font-size: 1.75rem;
-      font-weight: 500;
-      margin: 0 0 30px;
-      color: #1a202c;
-      font-family: 'Cormorant Garamond', serif;
-    }
-
-    .search-form {
-      .form-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 20px;
-
-        .form-field {
-          width: 100%;
-        }
-
-        .search-actions {
-          display: flex;
-          gap: 12px;
-          align-items: center;
-          grid-column: 1 / -1;
-
-          .search-btn {
-            padding: 0 32px;
-            height: 48px;
-            font-size: 1rem;
-            font-weight: 500;
-            letter-spacing: 0.05em;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            
-            mat-icon {
-              margin-right: 8px;
-            }
-          }
-
-          .reset-btn {
-            height: 48px;
-            
-            mat-icon {
-              margin-right: 8px;
-            }
-          }
-        }
-      }
-    }
-  }
-}
-
-.rooms-section {
+.payment-container {
   max-width: 1400px;
   margin: 0 auto;
-  padding: 80px 20px;
+}
 
-  .section-header {
-    text-align: center;
-    margin-bottom: 60px;
+.payment-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 40px;
 
-    .section-title {
-      font-size: clamp(2rem, 4vw, 3rem);
-      font-weight: 400;
-      margin: 0 0 16px;
-      color: #1a202c;
-      font-family: 'Cormorant Garamond', serif;
-    }
+  .back-btn {
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
 
-    .section-subtitle {
-      font-size: 1.125rem;
-      color: #718096;
-      margin: 0;
+    &:hover:not(:disabled) {
+      background: #f7fafc;
     }
   }
 
-  .rooms-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-    gap: 32px;
+  .page-title {
+    font-size: 2.5rem;
+    font-weight: 400;
+    margin: 0;
+    color: #1a202c;
+    font-family: 'Cormorant Garamond', serif;
+  }
+}
 
-    .room-card {
-      border-radius: 12px;
-      overflow: hidden;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-      cursor: pointer;
-      display: flex;
-      flex-direction: column;
+.payment-content {
+  display: grid;
+  grid-template-columns: 1fr 450px;
+  gap: 32px;
+}
 
-      &:hover {
-        transform: translateY(-8px);
-        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+.forms-section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 
-        .room-image {
-          transform: scale(1.05);
-        }
-      }
+  .form-card {
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 
-      .room-image-container {
-        position: relative;
-        height: 250px;
-        overflow: hidden;
+    mat-card-header {
+      padding: 24px 24px 0;
 
-        .room-image {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
-          transition: transform 0.5s ease;
-        }
-
-        .room-type-badge {
-          position: absolute;
-          top: 16px;
-          right: 16px;
-          background: rgba(255, 255, 255, 0.95);
-          color: #1a202c;
-          padding: 8px 16px;
-          border-radius: 24px;
-          font-size: 0.875rem;
-          font-weight: 600;
-          letter-spacing: 0.05em;
-          text-transform: uppercase;
-          backdrop-filter: blur(10px);
-        }
-      }
-
-      .room-content {
-        padding: 24px;
-        flex-grow: 1;
+      mat-card-title {
         display: flex;
-        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        font-size: 1.5rem;
+        font-weight: 500;
+        color: #1a202c;
+        font-family: 'Cormorant Garamond', serif;
 
-        .room-name {
-          font-size: 1.5rem;
-          font-weight: 500;
-          margin: 0 0 12px;
-          color: #1a202c;
-          font-family: 'Cormorant Garamond', serif;
-        }
-
-        .room-description {
-          font-size: 0.9375rem;
-          color: #718096;
-          margin: 0 0 20px;
-          line-height: 1.6;
-        }
-
-        .room-details {
-          display: flex;
-          flex-direction: column;
-          gap: 12px;
-          margin-bottom: 20px;
-
-          .detail-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: #4a5568;
-            font-size: 0.875rem;
-
-            mat-icon {
-              font-size: 18px;
-              width: 18px;
-              height: 18px;
-              color: #667eea;
-            }
-          }
-        }
-
-        .amenities {
-          margin-bottom: 24px;
-
-          mat-chip {
-            font-size: 0.75rem;
-            height: 28px;
-            background: #edf2f7;
-            color: #2d3748;
-          }
-
-          .more-chip {
-            background: #667eea;
-            color: white;
-          }
-        }
-
-        .room-footer {
-          margin-top: auto;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding-top: 20px;
-          border-top: 1px solid #e2e8f0;
-
-          .price-section {
-            display: flex;
-            align-items: baseline;
-            gap: 6px;
-
-            .price-label {
-              font-size: 0.875rem;
-              color: #718096;
-            }
-
-            .price {
-              font-size: 2rem;
-              font-weight: 600;
-              color: #1a202c;
-              font-family: 'Cormorant Garamond', serif;
-            }
-
-            .price-suffix {
-              font-size: 0.875rem;
-              color: #718096;
-            }
-          }
-
-          .book-btn {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            font-weight: 500;
-            padding: 0 24px;
-
-            mat-icon {
-              margin-left: 8px;
-              font-size: 18px;
-            }
-          }
+        mat-icon {
+          color: #667eea;
         }
       }
     }
-  }
 
-  .no-results {
-    text-align: center;
-    padding: 80px 20px;
-
-    .no-results-icon {
-      font-size: 80px;
-      width: 80px;
-      height: 80px;
-      color: #cbd5e0;
-      margin-bottom: 24px;
-    }
-
-    h3 {
-      font-size: 1.75rem;
-      font-weight: 500;
-      color: #1a202c;
-      margin: 0 0 12px;
-    }
-
-    p {
-      font-size: 1rem;
-      color: #718096;
-      margin: 0 0 32px;
-      max-width: 500px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    button {
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    }
-  }
-}
-
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@media (max-width: 768px) {
-  .hero-section {
-    height: 400px;
-  }
-
-  .search-container {
-    margin-top: -60px;
-
-    .search-wrapper {
+    mat-card-content {
       padding: 24px;
 
-      .search-form .form-grid {
-        grid-template-columns: 1fr;
+      .customer-form,
+      .payment-form {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
 
-        .search-actions {
-          flex-direction: column;
+        .full-width {
+          width: 100%;
+        }
 
-          button {
+        .form-row {
+          display: grid;
+          grid-template-columns: 2fr 1fr;
+          gap: 16px;
+
+          .expiry-field,
+          .cvv-field {
             width: 100%;
           }
         }
       }
     }
+
+    &.payment-card {
+      mat-card-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+
+        .hint-btn {
+          color: #667eea;
+        }
+      }
+    }
   }
 
-  .rooms-section {
-    padding: 60px 20px;
+  .test-card-hint {
+    display: flex;
+    gap: 12px;
+    background: #ebf4ff;
+    border-left: 4px solid #4299e1;
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 24px;
 
-    .rooms-grid {
-      grid-template-columns: 1fr;
+    mat-icon {
+      color: #4299e1;
+      font-size: 24px;
+      width: 24px;
+      height: 24px;
+    }
+
+    .hint-content {
+      flex: 1;
+
+      strong {
+        display: block;
+        color: #2c5282;
+        margin-bottom: 8px;
+        font-size: 0.9375rem;
+      }
+
+      p {
+        margin: 4px 0;
+        font-size: 0.875rem;
+        color: #2d3748;
+        font-family: monospace;
+      }
+    }
+  }
+
+  .payment-error {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: #fff5f5;
+    border-left: 4px solid #fc8181;
+    padding: 16px;
+    border-radius: 8px;
+    margin-top: 16px;
+
+    mat-icon {
+      color: #fc8181;
+      font-size: 24px;
+      width: 24px;
+      height: 24px;
+    }
+
+    span {
+      color: #742a2a;
+      font-size: 0.9375rem;
+    }
+  }
+
+  .secure-notice {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 16px;
+    padding: 16px;
+    background: #f0fdf4;
+    border-radius: 8px;
+
+    mat-icon {
+      color: #48bb78;
+      font-size: 20px;
+      width: 20px;
+      height: 20px;
+    }
+
+    p {
+      margin: 0;
+      font-size: 0.875rem;
+      color: #22543d;
     }
   }
 }
+
+.summary-section {
+  .summary-card {
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    position: sticky;
+    top: 20px;
+
+    mat-card-header {
+      padding: 24px 24px 0;
+
+      mat-card-title {
+        font-size: 1.5rem;
+        font-weight: 500;
+        color: #1a202c;
+        font-family: 'Cormorant Garamond', serif;
+      }
+    }
+
+    mat-card-content {
+      padding: 24px;
+
+      .room-summary {
+        display: flex;
+        gap: 16px;
+        padding-bottom: 24px;
+        border-bottom: 2px solid #e2e8f0;
+
+        .room-thumb {
+          width: 100px;
+          height: 80px;
+          object-fit: cover;
+          border-radius: 8px;
+        }
+
+        .room-info {
+          flex: 1;
+
+          h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin: 0 0 8px;
+            color: #1a202c;
+          }
+
+          .room-type {
+            font-size: 0.875rem;
+            color: #718096;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+          }
+        }
+      }
+
+      .booking-details {
+        padding: 24px 0;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+
+        .detail-row {
+          display: flex;
+          gap: 12px;
+          align-items: flex-start;
+
+          &.highlight {
+            background: #f7fafc;
+            padding: 12px;
+            margin: 8px -12px;
+            border-radius: 8px;
+
+            mat-icon {
+              color: #667eea;
+            }
+
+            .detail-content .value {
+              color: #667eea;
+              font-weight: 600;
+            }
+          }
+
+          mat-icon {
+            color: #718096;
+            font-size: 20px;
+            width: 20px;
+            height: 20px;
+            margin-top: 2px;
+          }
+
+          .detail-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+
+            .label {
+              font-size: 0.875rem;
+              color: #718096;
+            }
+
+            .value {
+              font-size: 1rem;
+              color: #1a202c;
+              font-weight: 500;
+            }
+          }
+        }
+      }
+
+      .price-summary {
+        padding: 24px 0;
+        border-top: 2px solid #e2e8f0;
+
+        .price-row {
+          display: flex;
+          justify-content: space-between;
+          padding: 12px 0;
+          font-size: 0.9375rem;
+          color: #2d3748;
+
+          &.total {
+            padding-top: 16px;
+            margin-top: 8px;
+            border-top: 2px solid #e2e8f0;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #1a202c;
+
+            span:last-child {
+              color: #667eea;
+              font-family: 'Cormorant Garamond', serif;
+              font-size: 1.75rem;
+            }
+          }
+        }
+      }
+
+      .pay-btn {
+        width: 100%;
+        height: 64px;
+        font-size: 1.25rem;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
+        margin-top: 16px;
+
+        mat-icon {
+          margin-right: 8px;
+          vertical-align: middle;
+        }
+
+        .processing {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          gap: 12px;
+
+          mat-spinner {
+            display: inline-block;
+          }
+        }
+
+        &:disabled {
+          background: #e2e8f0;
+          color: #a0aec0;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1024px) {
+  .payment-content {
+    grid-template-columns: 1fr;
+  }
+
+  .summary-section .summary-card {
+    position: static;
+  }
+}
+
+@media (max-width: 768px) {
+  .payment-header {
+    .page-title {
+      font-size: 1.75rem;
+    }
+  }
+
+  .forms-section {
+    .form-card {
+      mat-card-content {
+        .payment-form .form-row {
+          grid-template-columns: 1fr;
+        }
+      }
+    }
+  }
+}
+
 </style>
-<div class="homepage">
-  <!-- Hero Section -->
-  <div class="hero-section">
-    <div class="hero-overlay"></div>
-    <div class="hero-content">
-      <h1 class="hero-title">Experience Luxury Redefined</h1>
-      <p class="hero-subtitle">Discover unparalleled comfort in the heart of elegance</p>
-    </div>
-  </div>
-
-  <!-- Search Section -->
-  <div class="search-container">
-    <div class="search-wrapper">
-      <h2 class="search-title">Find Your Perfect Stay</h2>
-      
-      <form [formGroup]="searchForm" class="search-form">
-        <div class="form-grid">
-          <mat-form-field appearance="outline" class="form-field">
-            <mat-label>Check-in</mat-label>
-            <input matInput [matDatepicker]="pickerIn" formControlName="checkIn" [min]="minDate">
-            <mat-datepicker-toggle matIconSuffix [for]="pickerIn"></mat-datepicker-toggle>
-            <mat-datepicker #pickerIn></mat-datepicker>
-          </mat-form-field>
-
-          <mat-form-field appearance="outline" class="form-field">
-            <mat-label>Check-out</mat-label>
-            <input matInput [matDatepicker]="pickerOut" formControlName="checkOut" [min]="searchForm.get('checkIn')?.value || minDate">
-            <mat-datepicker-toggle matIconSuffix [for]="pickerOut"></mat-datepicker-toggle>
-            <mat-datepicker #pickerOut></mat-datepicker>
-            <mat-error *ngIf="!isCheckOutValid()">Check-out must be after check-in</mat-error>
-          </mat-form-field>
-
-          <mat-form-field appearance="outline" class="form-field">
-            <mat-label>Adults</mat-label>
-            <input matInput type="number" formControlName="adults" min="1">
-          </mat-form-field>
-
-          <mat-form-field appearance="outline" class="form-field">
-            <mat-label>Children</mat-label>
-            <input matInput type="number" formControlName="children" min="0">
-          </mat-form-field>
-
-          <mat-form-field appearance="outline" class="form-field">
-            <mat-label>Room Type</mat-label>
-            <mat-select formControlName="roomType">
-              <mat-option *ngFor="let type of roomTypes" [value]="type">
-                {{ type }}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
-
-          <div class="search-actions">
-            <button mat-raised-button color="primary" class="search-btn" 
-                    (click)="onSearch()" 
-                    [disabled]="!searchForm.valid || !isCheckOutValid()">
-              <mat-icon>search</mat-icon>
-              Search Rooms
-            </button>
-            <button mat-stroked-button class="reset-btn" (click)="resetSearch()" *ngIf="isSearched">
-              <mat-icon>refresh</mat-icon>
-              Reset
-            </button>
-          </div>
-        </div>
-      </form>
-    </div>
-  </div>
-
-  <!-- Results Section -->
-  <div class="rooms-section">
-    <div class="section-header">
-      <h2 class="section-title">
-        {{ isSearched ? 'Available Rooms' : 'Our Exquisite Rooms' }}
-      </h2>
-      <p class="section-subtitle" *ngIf="!isSearched">
-        Choose from our carefully curated selection of luxury accommodations
-      </p>
-    </div>
-
-    <div class="rooms-grid" *ngIf="filteredRooms.length > 0">
-      <mat-card class="room-card" *ngFor="let room of filteredRooms">
-        <div class="room-image-container">
-          <img [src]="room.image" [alt]="room.name" class="room-image">
-          <div class="room-type-badge">{{ room.roomType }}</div>
-        </div>
-        
-        <mat-card-content class="room-content">
-          <h3 class="room-name">{{ room.name }}</h3>
-          <p class="room-description">{{ room.description }}</p>
-          
-          <div class="room-details">
-            <div class="detail-item">
-              <mat-icon>king_bed</mat-icon>
-              <span>{{ room.bedType }}</span>
-            </div>
-            <div class="detail-item">
-              <mat-icon>square_foot</mat-icon>
-              <span>{{ room.size }}</span>
-            </div>
-            <div class="detail-item">
-              <mat-icon>people</mat-icon>
-              <span>{{ room.maxAdults }} Adults, {{ room.maxChildren }} Children</span>
-            </div>
-          </div>
-
-          <div class="amenities">
-            <mat-chip-set>
-              <mat-chip *ngFor="let amenity of room.amenities.slice(0, 3)">
-                {{ amenity }}
-              </mat-chip>
-              <mat-chip *ngIf="room.amenities.length > 3" class="more-chip">
-                +{{ room.amenities.length - 3 }} more
-              </mat-chip>
-            </mat-chip-set>
-          </div>
-
-          <div class="room-footer">
-            <div class="price-section">
-              <span class="price-label">From</span>
-              <span class="price">${{ room.price }}</span>
-              <span class="price-suffix">/ night</span>
-            </div>
-            <button mat-raised-button color="primary" class="book-btn" (click)="bookRoom(room)">
-              Book Now
-              <mat-icon>arrow_forward</mat-icon>
-            </button>
-          </div>
-        </mat-card-content>
-      </mat-card>
-    </div>
-
-    <div class="no-results" *ngIf="filteredRooms.length === 0 && isSearched">
-      <mat-icon class="no-results-icon">hotel</mat-icon>
-      <h3>No Rooms Available</h3>
-      <p>We couldn't find any rooms matching your criteria. Please try different dates or room type.</p>
-      <button mat-raised-button color="primary" (click)="resetSearch()">
-        View All Rooms
+<div class="payment-page" *ngIf="booking">
+  <div class="payment-container">
+    <!-- Header -->
+    <div class="payment-header">
+      <button mat-icon-button class="back-btn" (click)="goBack()" [disabled]="isProcessing">
+        <mat-icon>arrow_back</mat-icon>
       </button>
+      <h1 class="page-title">Complete Your Payment</h1>
+    </div>
+
+    <div class="payment-content">
+      <!-- Payment Form Section -->
+      <div class="forms-section">
+        <!-- Customer Details -->
+        <mat-card class="form-card">
+          <mat-card-header>
+            <mat-card-title>
+              <mat-icon>person</mat-icon>
+              Guest Information
+            </mat-card-title>
+          </mat-card-header>
+
+          <mat-card-content>
+            <form [formGroup]="customerForm" class="customer-form">
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Full Name</mat-label>
+                <input matInput formControlName="name" placeholder="John Doe">
+                <mat-icon matPrefix>person</mat-icon>
+                <mat-error *ngIf="customerForm.get('name')?.hasError('required')">
+                  Name is required
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Email Address</mat-label>
+                <input matInput type="email" formControlName="email" placeholder="john.doe@example.com">
+                <mat-icon matPrefix>email</mat-icon>
+                <mat-error *ngIf="customerForm.get('email')?.hasError('required')">
+                  Email is required
+                </mat-error>
+                <mat-error *ngIf="customerForm.get('email')?.hasError('email')">
+                  Please enter a valid email
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Phone Number</mat-label>
+                <input matInput type="tel" formControlName="phone" placeholder="+1 (555) 123-4567">
+                <mat-icon matPrefix>phone</mat-icon>
+                <mat-error *ngIf="customerForm.get('phone')?.hasError('required')">
+                  Phone number is required
+                </mat-error>
+                <mat-error *ngIf="customerForm.get('phone')?.hasError('pattern')">
+                  Please enter a valid phone number
+                </mat-error>
+              </mat-form-field>
+            </form>
+          </mat-card-content>
+        </mat-card>
+
+        <!-- Payment Details -->
+        <mat-card class="form-card payment-card">
+          <mat-card-header>
+            <mat-card-title>
+              <mat-icon>credit_card</mat-icon>
+              Payment Details
+            </mat-card-title>
+            <button mat-icon-button class="hint-btn" (click)="toggleCardHint()" type="button">
+              <mat-icon>info</mat-icon>
+            </button>
+          </mat-card-header>
+
+          <mat-card-content>
+            <div class="test-card-hint" *ngIf="showCardHint">
+              <mat-icon>lightbulb</mat-icon>
+              <div class="hint-content">
+                <strong>Test Card Details:</strong>
+                <p>Card: 4111 1111 1111 1111</p>
+                <p>CVV: 123</p>
+                <p>Expiry: Any future date (e.g., 12/25)</p>
+              </div>
+            </div>
+
+            <form [formGroup]="paymentForm" class="payment-form">
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Card Number</mat-label>
+                <input matInput formControlName="cardNumber" 
+                       placeholder="1234 5678 9012 3456"
+                       maxlength="19"
+                       (input)="formatCardNumber($event)">
+                <mat-icon matPrefix>credit_card</mat-icon>
+                <mat-error *ngIf="paymentForm.get('cardNumber')?.hasError('required')">
+                  Card number is required
+                </mat-error>
+                <mat-error *ngIf="paymentForm.get('cardNumber')?.hasError('pattern')">
+                  Please enter a valid 16-digit card number
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="full-width">
+                <mat-label>Cardholder Name</mat-label>
+                <input matInput formControlName="cardHolder" placeholder="JOHN DOE" style="text-transform: uppercase;">
+                <mat-icon matPrefix>person</mat-icon>
+                <mat-error *ngIf="paymentForm.get('cardHolder')?.hasError('required')">
+                  Cardholder name is required
+                </mat-error>
+              </mat-form-field>
+
+              <div class="form-row">
+                <mat-form-field appearance="outline" class="expiry-field">
+                  <mat-label>Expiry Date</mat-label>
+                  <input matInput formControlName="expiryDate" 
+                         placeholder="MM/YY"
+                         maxlength="5"
+                         (input)="formatExpiry($event)">
+                  <mat-icon matPrefix>date_range</mat-icon>
+                  <mat-error *ngIf="paymentForm.get('expiryDate')?.hasError('required')">
+                    Expiry date is required
+                  </mat-error>
+                  <mat-error *ngIf="paymentForm.get('expiryDate')?.hasError('pattern')">
+                    Format: MM/YY
+                  </mat-error>
+                </mat-form-field>
+
+                <mat-form-field appearance="outline" class="cvv-field">
+                  <mat-label>CVV</mat-label>
+                  <input matInput type="password" formControlName="cvv" 
+                         placeholder="123"
+                         maxlength="3">
+                  <mat-icon matPrefix>lock</mat-icon>
+                  <mat-error *ngIf="paymentForm.get('cvv')?.hasError('required')">
+                    CVV is required
+                  </mat-error>
+                  <mat-error *ngIf="paymentForm.get('cvv')?.hasError('pattern')">
+                    CVV must be 3 digits
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </form>
+
+            <div class="payment-error" *ngIf="paymentError">
+              <mat-icon>error</mat-icon>
+              <span>{{ paymentError }}</span>
+            </div>
+
+            <div class="secure-notice">
+              <mat-icon>lock</mat-icon>
+              <p>Your payment information is encrypted and secure</p>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
+
+      <!-- Order Summary Section -->
+      <div class="summary-section">
+        <mat-card class="summary-card">
+          <mat-card-header>
+            <mat-card-title>Order Summary</mat-card-title>
+          </mat-card-header>
+
+          <mat-card-content>
+            <div class="room-summary">
+              <img [src]="booking.room.image" [alt]="booking.room.name" class="room-thumb">
+              <div class="room-info">
+                <h3>{{ booking.room.name }}</h3>
+                <p class="room-type">{{ booking.room.roomType }}</p>
+              </div>
+            </div>
+
+            <div class="booking-details">
+              <div class="detail-row">
+                <mat-icon>calendar_today</mat-icon>
+                <div class="detail-content">
+                  <span class="label">Check-in</span>
+                  <span class="value">{{ formatDate(booking.checkIn) }}</span>
+                </div>
+              </div>
+
+              <div class="detail-row">
+                <mat-icon>calendar_today</mat-icon>
+                <div class="detail-content">
+                  <span class="label">Check-out</span>
+                  <span class="value">{{ formatDate(booking.checkOut) }}</span>
+                </div>
+              </div>
+
+              <div class="detail-row highlight">
+                <mat-icon>nightlight</mat-icon>
+                <div class="detail-content">
+                  <span class="label">Duration</span>
+                  <span class="value">{{ booking.nights }} {{ booking.nights === 1 ? 'Night' : 'Nights' }}</span>
+                </div>
+              </div>
+
+              <div class="detail-row">
+                <mat-icon>people</mat-icon>
+                <div class="detail-content">
+                  <span class="label">Guests</span>
+                  <span class="value">{{ booking.adults }} Adults, {{ booking.children }} Children</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="price-summary">
+              <div class="price-row">
+                <span>Room Rate ({{ booking.nights }} × ${{ booking.room.price }})</span>
+                <span>${{ booking.totalPrice }}</span>
+              </div>
+              <div class="price-row">
+                <span>Taxes & Fees</span>
+                <span>$0</span>
+              </div>
+              <div class="price-row total">
+                <span>Total</span>
+                <span>${{ booking.totalPrice }}</span>
+              </div>
+            </div>
+
+            <button mat-raised-button color="primary" 
+                    class="pay-btn"
+                    (click)="processPayment()"
+                    [disabled]="customerForm.invalid || paymentForm.invalid || isProcessing">
+              <span *ngIf="!isProcessing">
+                <mat-icon>lock</mat-icon>
+                Pay ${{ booking.totalPrice }}
+              </span>
+              <span *ngIf="isProcessing" class="processing">
+                <mat-spinner diameter="24"></mat-spinner>
+                Processing Payment...
+              </span>
+            </button>
+          </mat-card-content>
+        </mat-card>
+      </div>
     </div>
   </div>
 </div>
+
 <!--ts file  -->
 <div>import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
@@ -526,17 +634,14 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
-import { MatSelectModule } from '@angular/material/select';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatNativeDateModule } from '@angular/material/core';
 import { MatIconModule } from '@angular/material/icon';
-import { MatChipsModule } from '@angular/material/chips';
-import { RoomService } from '../../services/room.service';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { PaymentService } from '../../services/payment.service';
 import { BookingService } from '../../services/booking.service';
-import { Room, SearchCriteria } from '../../models/room.model';
+import { Booking } from '../../models/room.model';
 
 @Component({
-  selector: 'app-homepage',
+  selector: 'app-payment',
   standalone: true,
   imports: [
     CommonModule,
@@ -545,109 +650,116 @@ import { Room, SearchCriteria } from '../../models/room.model';
     MatButtonModule,
     MatFormFieldModule,
     MatInputModule,
-    MatSelectModule,
-    MatDatepickerModule,
-    MatNativeDateModule,
     MatIconModule,
-    MatChipsModule
+    MatProgressSpinnerModule
   ],
-  templateUrl: './homepage.component.html',
-  styleUrls: ['./homepage.component.scss']
+  templateUrl: './payment.component.html',
+  styleUrls: ['./payment.component.scss']
 })
-export class HomepageComponent implements OnInit {
-  searchForm!: FormGroup;
-  rooms: Room[] = [];
-  filteredRooms: Room[] = [];
-  isSearched = false;
-  minDate = new Date();
-
-  roomTypes = ['All', 'Standard', 'Deluxe', 'Suite'];
+export class PaymentComponent implements OnInit {
+  paymentForm!: FormGroup;
+  customerForm!: FormGroup;
+  booking: Booking | null = null;
+  isProcessing = false;
+  paymentError = '';
+  showCardHint = false;
 
   constructor(
     private fb: FormBuilder,
-    private roomService: RoomService,
+    private paymentService: PaymentService,
     private bookingService: BookingService,
     private router: Router
   ) {}
 
   ngOnInit(): void {
-    this.initializeForm();
-    this.loadRooms();
+    this.booking = this.bookingService.getCurrentBooking();
+
+    if (!this.booking) {
+      this.router.navigate(['/']);
+      return;
+    }
+
+    this.initializeForms();
   }
 
-  initializeForm(): void {
-    this.searchForm = this.fb.group({
-      checkIn: [null, Validators.required],
-      checkOut: [null, Validators.required],
-      adults: [1, [Validators.required, Validators.min(1)]],
-      children: [0, [Validators.required, Validators.min(0)]],
-      roomType: ['All']
+  initializeForms(): void {
+    this.customerForm = this.fb.group({
+      name: ['', Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      phone: ['', [Validators.required, Validators.pattern(/^\+?[\d\s-()]+$/)]]
     });
 
-    // Add custom validator for checkout date
-    this.searchForm.get('checkIn')?.valueChanges.subscribe(() => {
-      this.searchForm.get('checkOut')?.updateValueAndValidity();
+    this.paymentForm = this.fb.group({
+      cardNumber: ['', [Validators.required, Validators.pattern(/^\d{16}$/)]],
+      cardHolder: ['', Validators.required],
+      expiryDate: ['', [Validators.required, Validators.pattern(/^\d{2}\/\d{2}$/)]],
+      cvv: ['', [Validators.required, Validators.pattern(/^\d{3}$/)]]
     });
   }
 
-  loadRooms(): void {
-    this.rooms = this.roomService.getAllRooms();
-    this.filteredRooms = this.rooms;
+  formatCardNumber(event: any): void {
+    let value = event.target.value.replace(/\s/g, '');
+    let formattedValue = value.replace(/(\d{4})/g, '$1 ').trim();
+    this.paymentForm.patchValue({ cardNumber: formattedValue }, { emitEvent: false });
   }
 
-  onSearch(): void {
-    if (this.searchForm.valid) {
-      const criteria: SearchCriteria = {
-        checkIn: this.searchForm.value.checkIn,
-        checkOut: this.searchForm.value.checkOut,
-        adults: this.searchForm.value.adults,
-        children: this.searchForm.value.children,
-        roomType: this.searchForm.value.roomType
+  formatExpiry(event: any): void {
+    let value = event.target.value.replace(/\D/g, '');
+    if (value.length >= 2) {
+      value = value.slice(0, 2) + '/' + value.slice(2, 4);
+    }
+    this.paymentForm.patchValue({ expiryDate: value }, { emitEvent: false });
+  }
+
+  toggleCardHint(): void {
+    this.showCardHint = !this.showCardHint;
+  }
+
+  async processPayment(): Promise<void> {
+    if (this.customerForm.invalid || this.paymentForm.invalid) {
+      return;
+    }
+
+    // Update customer details
+    const { name, email, phone } = this.customerForm.value;
+    this.bookingService.updateCustomerDetails(name, email, phone);
+
+    this.isProcessing = true;
+    this.paymentError = '';
+
+    try {
+      const paymentDetails = {
+        cardNumber: this.paymentForm.value.cardNumber,
+        cardHolder: this.paymentForm.value.cardHolder,
+        expiryDate: this.paymentForm.value.expiryDate,
+        cvv: this.paymentForm.value.cvv
       };
 
-      this.filteredRooms = this.roomService.searchRooms(criteria);
-      this.isSearched = true;
+      const success = await this.paymentService.processPayment(paymentDetails);
+
+      if (success) {
+        this.router.navigate(['/payment-success']);
+      } else {
+        this.paymentError = 'Payment failed. Please check your card details and try again.';
+        this.isProcessing = false;
+      }
+    } catch (error) {
+      this.paymentError = 'An error occurred during payment processing. Please try again.';
+      this.isProcessing = false;
     }
   }
 
-  resetSearch(): void {
-    this.searchForm.reset({
-      adults: 1,
-      children: 0,
-      roomType: 'All'
+  goBack(): void {
+    this.router.navigate(['/room-preview', this.booking?.room.id]);
+  }
+
+  formatDate(date: Date): string {
+    return new Date(date).toLocaleDateString('en-US', {
+      month: 'short',
+      day: 'numeric',
+      year: 'numeric'
     });
-    this.filteredRooms = this.rooms;
-    this.isSearched = false;
-  }
-
-  bookRoom(room: Room): void {
-    const checkIn = this.searchForm.value.checkIn;
-    const checkOut = this.searchForm.value.checkOut;
-    const adults = this.searchForm.value.adults || 1;
-    const children = this.searchForm.value.children || 0;
-
-    if (checkIn && checkOut) {
-      this.bookingService.createBooking(room, checkIn, checkOut, adults, children);
-      this.router.navigate(['/room-preview', room.id]);
-    } else {
-      // Use default dates if not selected
-      const defaultCheckIn = new Date();
-      const defaultCheckOut = new Date();
-      defaultCheckOut.setDate(defaultCheckOut.getDate() + 1);
-      
-      this.bookingService.createBooking(room, defaultCheckIn, defaultCheckOut, adults, children);
-      this.router.navigate(['/room-preview', room.id]);
-    }
-  }
-
-  isCheckOutValid(): boolean {
-    const checkIn = this.searchForm.get('checkIn')?.value;
-    const checkOut = this.searchForm.get('checkOut')?.value;
-    
-    if (checkIn && checkOut) {
-      return checkOut > checkIn;
-    }
-    return true;
   }
 }
+
 </div>
