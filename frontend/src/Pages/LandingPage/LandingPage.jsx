@@ -4,7 +4,7 @@ import { Code, Laptop, Cloud, Mouse, ArrowDownward } from '@mui/icons-material';
 import Storage from "@mui/icons-material/Storage";
 // import LogIn from '../LogIn/LogIn';
 import { Link } from 'react-router-dom';
-const snipted = `<div class="homepage">
+const snipted = String.raw`<div class="homepage">
   <!-- Hero Section -->
   <div class="hero-section">
     <div class="hero-overlay"></div>
