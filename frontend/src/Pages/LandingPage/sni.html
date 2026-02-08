@@ -1,3 +1,381 @@
+<style>.homepage {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #e8eef3 100%);
+}
+
+.hero-section {
+  position: relative;
+  height: 500px;
+  background: linear-gradient(135deg, #1a202c 0%, #2d3748 100%);
+  background-image: url('https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?w=1600&q=80');
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+
+  .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, rgba(26, 32, 44, 0.85) 0%, rgba(45, 55, 72, 0.75) 100%);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    color: white;
+    padding: 0 20px;
+    animation: fadeInUp 1s ease-out;
+
+    .hero-title {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 300;
+      letter-spacing: 0.05em;
+      margin: 0 0 1rem;
+      font-family: 'Cormorant Garamond', serif;
+      text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .hero-subtitle {
+      font-size: clamp(1rem, 2vw, 1.25rem);
+      font-weight: 300;
+      letter-spacing: 0.1em;
+      margin: 0;
+      opacity: 0.95;
+      text-transform: uppercase;
+    }
+  }
+}
+
+.search-container {
+  margin-top: -80px;
+  position: relative;
+  z-index: 10;
+  padding: 0 20px;
+
+  .search-wrapper {
+    max-width: 1200px;
+    margin: 0 auto;
+    background: white;
+    border-radius: 16px;
+    padding: 40px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
+
+    .search-title {
+      font-size: 1.75rem;
+      font-weight: 500;
+      margin: 0 0 30px;
+      color: #1a202c;
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    .search-form {
+      .form-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 20px;
+
+        .form-field {
+          width: 100%;
+        }
+
+        .search-actions {
+          display: flex;
+          gap: 12px;
+          align-items: center;
+          grid-column: 1 / -1;
+
+          .search-btn {
+            padding: 0 32px;
+            height: 48px;
+            font-size: 1rem;
+            font-weight: 500;
+            letter-spacing: 0.05em;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            
+            mat-icon {
+              margin-right: 8px;
+            }
+          }
+
+          .reset-btn {
+            height: 48px;
+            
+            mat-icon {
+              margin-right: 8px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.rooms-section {
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 80px 20px;
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 60px;
+
+    .section-title {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 400;
+      margin: 0 0 16px;
+      color: #1a202c;
+      font-family: 'Cormorant Garamond', serif;
+    }
+
+    .section-subtitle {
+      font-size: 1.125rem;
+      color: #718096;
+      margin: 0;
+    }
+  }
+
+  .rooms-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 32px;
+
+    .room-card {
+      border-radius: 12px;
+      overflow: hidden;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+
+      &:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+
+        .room-image {
+          transform: scale(1.05);
+        }
+      }
+
+      .room-image-container {
+        position: relative;
+        height: 250px;
+        overflow: hidden;
+
+        .room-image {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          transition: transform 0.5s ease;
+        }
+
+        .room-type-badge {
+          position: absolute;
+          top: 16px;
+          right: 16px;
+          background: rgba(255, 255, 255, 0.95);
+          color: #1a202c;
+          padding: 8px 16px;
+          border-radius: 24px;
+          font-size: 0.875rem;
+          font-weight: 600;
+          letter-spacing: 0.05em;
+          text-transform: uppercase;
+          backdrop-filter: blur(10px);
+        }
+      }
+
+      .room-content {
+        padding: 24px;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+
+        .room-name {
+          font-size: 1.5rem;
+          font-weight: 500;
+          margin: 0 0 12px;
+          color: #1a202c;
+          font-family: 'Cormorant Garamond', serif;
+        }
+
+        .room-description {
+          font-size: 0.9375rem;
+          color: #718096;
+          margin: 0 0 20px;
+          line-height: 1.6;
+        }
+
+        .room-details {
+          display: flex;
+          flex-direction: column;
+          gap: 12px;
+          margin-bottom: 20px;
+
+          .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #4a5568;
+            font-size: 0.875rem;
+
+            mat-icon {
+              font-size: 18px;
+              width: 18px;
+              height: 18px;
+              color: #667eea;
+            }
+          }
+        }
+
+        .amenities {
+          margin-bottom: 24px;
+
+          mat-chip {
+            font-size: 0.75rem;
+            height: 28px;
+            background: #edf2f7;
+            color: #2d3748;
+          }
+
+          .more-chip {
+            background: #667eea;
+            color: white;
+          }
+        }
+
+        .room-footer {
+          margin-top: auto;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding-top: 20px;
+          border-top: 1px solid #e2e8f0;
+
+          .price-section {
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
+
+            .price-label {
+              font-size: 0.875rem;
+              color: #718096;
+            }
+
+            .price {
+              font-size: 2rem;
+              font-weight: 600;
+              color: #1a202c;
+              font-family: 'Cormorant Garamond', serif;
+            }
+
+            .price-suffix {
+              font-size: 0.875rem;
+              color: #718096;
+            }
+          }
+
+          .book-btn {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            font-weight: 500;
+            padding: 0 24px;
+
+            mat-icon {
+              margin-left: 8px;
+              font-size: 18px;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .no-results {
+    text-align: center;
+    padding: 80px 20px;
+
+    .no-results-icon {
+      font-size: 80px;
+      width: 80px;
+      height: 80px;
+      color: #cbd5e0;
+      margin-bottom: 24px;
+    }
+
+    h3 {
+      font-size: 1.75rem;
+      font-weight: 500;
+      color: #1a202c;
+      margin: 0 0 12px;
+    }
+
+    p {
+      font-size: 1rem;
+      color: #718096;
+      margin: 0 0 32px;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    button {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    }
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-section {
+    height: 400px;
+  }
+
+  .search-container {
+    margin-top: -60px;
+
+    .search-wrapper {
+      padding: 24px;
+
+      .search-form .form-grid {
+        grid-template-columns: 1fr;
+
+        .search-actions {
+          flex-direction: column;
+
+          button {
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
+
+  .rooms-section {
+    padding: 60px 20px;
+
+    .rooms-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+}
+</style>
 <div class="homepage">
   <!-- Hero Section -->
   <div class="hero-section">
