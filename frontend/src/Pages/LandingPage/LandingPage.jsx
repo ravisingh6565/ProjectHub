@@ -145,7 +145,7 @@ const snipted = `<div class="homepage">
     </div>
   </div>
 </div>
-`
+`;
 const GlowingOrb = ({ delay = 0, color1, color2, size = 200 }) => (
   <div 
     className="absolute rounded-full animate-pulse blur-xl opacity-20"
@@ -317,8 +317,12 @@ const LandingPage = () => {
               mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
             }`}
           >
-            Connect with creators and explore diverse projects in our vibrant community. {snipted}
+            Connect with creators and explore diverse projects in our vibrant community. 
           </p>
+
+            <pre className="text-sm text-gray-200 bg-black/40 p-4 rounded-lg overflow-x-auto">
+    <code>{snipted}</code>
+  </pre>
           <div 
             className={`flex gap-6 justify-center transition-all duration-1000 delay-500 ${
               mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
