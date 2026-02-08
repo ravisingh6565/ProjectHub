@@ -1,669 +1,590 @@
-<style>.success-page {
+<style>.room-preview {
   min-height: 100vh;
   background: linear-gradient(135deg, #f5f7fa 0%, #e8eef3 100%);
-  padding: 60px 20px;
+  padding: 40px 20px;
 }
 
-.success-container {
-  max-width: 900px;
+.preview-container {
+  max-width: 1400px;
   margin: 0 auto;
 }
 
-.success-animation {
-  text-align: center;
-  margin-bottom: 48px;
-  animation: fadeInDown 0.6s ease-out;
+.preview-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 40px;
 
-  .checkmark-circle {
-    margin: 0 auto 24px;
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #48bb78 0%, #38a169 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    animation: scaleIn 0.5s ease-out 0.2s both;
-
-    .checkmark {
-      font-size: 72px;
-      width: 72px;
-      height: 72px;
-      color: white;
+  .back-btn {
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    
+    &:hover {
+      background: #f7fafc;
     }
   }
 
-  .success-title {
-    font-size: 3rem;
+  .page-title {
+    font-size: 2.5rem;
     font-weight: 400;
-    margin: 0 0 16px;
+    margin: 0;
     color: #1a202c;
     font-family: 'Cormorant Garamond', serif;
   }
-
-  .success-subtitle {
-    font-size: 1.25rem;
-    color: #718096;
-    margin: 0;
-  }
 }
 
-.details-card {
-  border-radius: 16px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-  margin-bottom: 32px;
-  animation: fadeInUp 0.6s ease-out 0.3s both;
+.preview-content {
+  display: grid;
+  grid-template-columns: 1fr 450px;
+  gap: 32px;
+}
 
-  mat-card-header {
-    padding: 32px 32px 0;
+.room-section {
+  .room-detail-card {
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
 
-    mat-card-title {
-      font-size: 1.75rem;
-      font-weight: 500;
-      color: #1a202c;
-      font-family: 'Cormorant Garamond', serif;
-    }
-  }
+    .room-image-large {
+      position: relative;
+      height: 400px;
+      overflow: hidden;
 
-  mat-card-content {
-    padding: 32px;
-
-    .confirmation-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px;
-      margin-bottom: 32px;
-
-      .confirmation-item {
-        display: flex;
-        gap: 16px;
-        padding: 20px;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        border-radius: 12px;
-        color: white;
-
-        mat-icon {
-          font-size: 32px;
-          width: 32px;
-          height: 32px;
-        }
-
-        .item-content {
-          display: flex;
-          flex-direction: column;
-          gap: 4px;
-
-          .label {
-            font-size: 0.875rem;
-            opacity: 0.9;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-          }
-
-          .value {
-            font-size: 1.125rem;
-            font-weight: 600;
-            font-family: monospace;
-          }
-        }
-      }
-    }
-
-    .room-summary {
-      display: flex;
-      gap: 24px;
-      padding: 24px;
-      background: #f7fafc;
-      border-radius: 12px;
-      margin-bottom: 32px;
-
-      .room-image {
-        width: 200px;
-        height: 150px;
+      img {
+        width: 100%;
+        height: 100%;
         object-fit: cover;
-        border-radius: 8px;
       }
 
-      .room-details {
-        flex: 1;
-
-        .room-name {
-          font-size: 1.5rem;
-          font-weight: 600;
-          margin: 0 0 8px;
-          color: #1a202c;
-        }
-
-        .room-type {
-          font-size: 1rem;
-          color: #667eea;
-          margin: 0 0 16px;
-          text-transform: uppercase;
-          letter-spacing: 0.05em;
-          font-weight: 500;
-        }
-
-        .room-specs {
-          display: flex;
-          gap: 24px;
-
-          span {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.9375rem;
-            color: #4a5568;
-
-            mat-icon {
-              font-size: 18px;
-              width: 18px;
-              height: 18px;
-            }
-          }
-        }
+      .room-type-overlay {
+        position: absolute;
+        bottom: 24px;
+        left: 24px;
+        background: rgba(255, 255, 255, 0.95);
+        color: #1a202c;
+        padding: 12px 24px;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        backdrop-filter: blur(10px);
       }
     }
 
-    .booking-info {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      margin-bottom: 32px;
+    .room-info {
+      padding: 40px;
 
-      .info-row {
+      .room-title {
+        font-size: 2.25rem;
+        font-weight: 500;
+        margin: 0 0 16px;
+        color: #1a202c;
+        font-family: 'Cormorant Garamond', serif;
+      }
+
+      .room-desc {
+        font-size: 1.125rem;
+        color: #718096;
+        line-height: 1.7;
+        margin: 0 0 32px;
+      }
+
+      .specs-grid {
         display: grid;
         grid-template-columns: repeat(2, 1fr);
-        gap: 16px;
+        gap: 24px;
+        margin-bottom: 32px;
 
-        .info-item {
+        .spec-item {
           display: flex;
+          align-items: flex-start;
           gap: 16px;
-          padding: 16px;
-          background: white;
-          border: 1px solid #e2e8f0;
-          border-radius: 8px;
+          padding: 20px;
+          background: #f7fafc;
+          border-radius: 12px;
 
           mat-icon {
             color: #667eea;
-            font-size: 24px;
-            width: 24px;
-            height: 24px;
+            font-size: 28px;
+            width: 28px;
+            height: 28px;
           }
 
-          .info-content {
-            flex: 1;
+          .spec-content {
             display: flex;
             flex-direction: column;
             gap: 4px;
 
-            .label {
+            .spec-label {
               font-size: 0.875rem;
               color: #718096;
+              font-weight: 500;
               text-transform: uppercase;
               letter-spacing: 0.05em;
             }
 
-            .value {
+            .spec-value {
               font-size: 1rem;
               color: #1a202c;
-              font-weight: 600;
+              font-weight: 500;
+            }
+          }
+        }
+      }
+
+      .divider {
+        margin: 32px 0;
+      }
+
+      .amenities-section {
+        .amenities-title {
+          font-size: 1.5rem;
+          font-weight: 500;
+          margin: 0 0 24px;
+          color: #1a202c;
+          font-family: 'Cormorant Garamond', serif;
+        }
+
+        .amenities-grid {
+          display: grid;
+          grid-template-columns: repeat(2, 1fr);
+          gap: 16px;
+
+          .amenity-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: #f7fafc;
+            border-radius: 8px;
+
+            mat-icon {
+              color: #48bb78;
+              font-size: 20px;
+              width: 20px;
+              height: 20px;
             }
 
-            .time {
-              font-size: 0.875rem;
-              color: #a0aec0;
+            span {
+              font-size: 0.9375rem;
+              color: #2d3748;
             }
           }
         }
       }
     }
+  }
+}
 
-    .payment-summary {
-      padding: 24px;
-      background: #f7fafc;
-      border-radius: 12px;
-      margin-bottom: 32px;
+.summary-section {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
 
-      .summary-title {
-        font-size: 1.25rem;
-        font-weight: 600;
-        margin: 0 0 16px;
+  .summary-card {
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    position: sticky;
+    top: 20px;
+
+    mat-card-header {
+      padding: 24px 24px 0;
+
+      mat-card-title {
+        font-size: 1.5rem;
+        font-weight: 500;
         color: #1a202c;
+        font-family: 'Cormorant Garamond', serif;
       }
+    }
 
-      .summary-rows {
-        .summary-row {
-          display: flex;
-          justify-content: space-between;
-          padding: 12px 0;
-          font-size: 0.9375rem;
-          color: #2d3748;
+    .summary-content {
+      padding: 24px;
 
-          &.total {
-            padding-top: 16px;
-            margin-top: 12px;
-            border-top: 2px solid #e2e8f0;
-            font-size: 1.25rem;
+      .summary-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 0;
+
+        &.highlight {
+          background: #f7fafc;
+          padding: 16px;
+          margin: 8px -8px;
+          border-radius: 8px;
+
+          .label {
             font-weight: 600;
             color: #1a202c;
-
-            span:last-child {
-              color: #48bb78;
-              font-family: 'Cormorant Garamond', serif;
-              font-size: 1.75rem;
-            }
           }
+
+          .value {
+            font-weight: 600;
+            color: #667eea;
+            font-size: 1.125rem;
+          }
+        }
+
+        .label {
+          font-size: 0.9375rem;
+          color: #718096;
+        }
+
+        .value {
+          font-size: 1rem;
+          color: #1a202c;
+          font-weight: 500;
         }
       }
 
-      .payment-info {
-        display: flex;
-        gap: 12px;
-        margin-top: 16px;
-        padding-top: 16px;
-        border-top: 1px solid #e2e8f0;
+      .divider {
+        margin: 16px 0;
+      }
 
-        mat-icon {
-          color: #718096;
-          font-size: 20px;
-          width: 20px;
-          height: 20px;
-        }
+      .divider-bold {
+        margin: 24px 0;
+        border-top-width: 2px;
+      }
 
-        .payment-details {
+      .price-breakdown {
+        margin: 16px 0;
+
+        .breakdown-row {
           display: flex;
-          flex-direction: column;
-          gap: 4px;
+          justify-content: space-between;
+          padding: 8px 0;
+          font-size: 0.9375rem;
 
-          .method {
-            font-size: 0.9375rem;
-            color: #1a202c;
-            font-weight: 500;
-          }
-
-          .date {
-            font-size: 0.875rem;
+          .label {
             color: #718096;
           }
-        }
-      }
-    }
 
-    .guest-info {
-      padding: 24px;
-      background: white;
-      border: 1px solid #e2e8f0;
-      border-radius: 12px;
-      margin-bottom: 32px;
-
-      .info-title {
-        font-size: 1.25rem;
-        font-weight: 600;
-        margin: 0 0 16px;
-        color: #1a202c;
-      }
-
-      .guest-details {
-        display: flex;
-        flex-direction: column;
-        gap: 12px;
-
-        .guest-item {
-          display: flex;
-          align-items: center;
-          gap: 12px;
-          font-size: 0.9375rem;
-          color: #2d3748;
-
-          mat-icon {
-            color: #667eea;
-            font-size: 20px;
-            width: 20px;
-            height: 20px;
+          .value {
+            color: #2d3748;
           }
         }
       }
-    }
 
-    .actions {
-      display: flex;
-      gap: 16px;
-      margin-bottom: 24px;
+      .total-row {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 0;
 
-      .download-btn {
-        flex: 1;
+        .label {
+          font-size: 1.25rem;
+          font-weight: 600;
+          color: #1a202c;
+        }
+
+        .value {
+          font-size: 2rem;
+          font-weight: 600;
+          color: #667eea;
+          font-family: 'Cormorant Garamond', serif;
+        }
+      }
+
+      .proceed-btn {
+        width: 100%;
         height: 56px;
         font-size: 1.125rem;
         font-weight: 600;
         letter-spacing: 0.05em;
         background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        margin-top: 16px;
 
         mat-icon {
-          margin-right: 8px;
+          margin-left: 8px;
         }
       }
 
-      .home-btn {
-        height: 56px;
-        padding: 0 32px;
-        font-size: 1rem;
-        font-weight: 500;
+      .info-note {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        margin-top: 16px;
+        padding: 16px;
+        background: #fff5f5;
+        border-radius: 8px;
+        border-left: 4px solid #fc8181;
 
         mat-icon {
-          margin-right: 8px;
+          color: #fc8181;
+          font-size: 20px;
+          width: 20px;
+          height: 20px;
         }
-      }
-    }
 
-    .confirmation-message {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 16px;
-      background: #ebf4ff;
-      border-radius: 8px;
-      border-left: 4px solid #4299e1;
-
-      mat-icon {
-        color: #4299e1;
-        font-size: 24px;
-        width: 24px;
-        height: 24px;
-      }
-
-      p {
-        margin: 0;
-        font-size: 0.9375rem;
-        color: #2c5282;
+        p {
+          margin: 0;
+          font-size: 0.875rem;
+          color: #742a2a;
+        }
       }
     }
   }
-}
-
-.info-cards {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 24px;
-  animation: fadeInUp 0.6s ease-out 0.5s both;
 
   .info-card {
-    text-align: center;
-    padding: 32px 24px;
-    border-radius: 12px;
+    border-radius: 16px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-    transition: transform 0.3s ease;
 
-    &:hover {
-      transform: translateY(-4px);
-    }
+    mat-card-content {
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
 
-    mat-icon {
-      font-size: 48px;
-      width: 48px;
-      height: 48px;
-      color: #667eea;
-      margin-bottom: 16px;
-    }
+      .info-item {
+        display: flex;
+        gap: 16px;
 
-    h4 {
-      font-size: 1.125rem;
-      font-weight: 600;
-      margin: 0 0 8px;
-      color: #1a202c;
-    }
+        mat-icon {
+          color: #667eea;
+          font-size: 24px;
+          width: 24px;
+          height: 24px;
+        }
 
-    p {
-      font-size: 0.9375rem;
-      color: #718096;
-      margin: 0;
-      line-height: 1.5;
+        .info-text {
+          h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin: 0 0 4px;
+            color: #1a202c;
+          }
+
+          p {
+            font-size: 0.875rem;
+            color: #718096;
+            margin: 0;
+          }
+        }
+      }
     }
   }
 }
 
-@keyframes fadeInDown {
-  from {
-    opacity: 0;
-    transform: translateY(-30px);
+@media (max-width: 1024px) {
+  .preview-content {
+    grid-template-columns: 1fr;
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
+  .summary-section {
+    .summary-card {
+      position: static;
+    }
   }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
 
-@keyframes scaleIn {
-  from {
-    opacity: 0;
-    transform: scale(0.5);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1);
+  .room-section .room-detail-card .room-info {
+    .specs-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .amenities-section .amenities-grid {
+      grid-template-columns: 1fr;
+    }
   }
 }
 
 @media (max-width: 768px) {
-  .success-animation {
-    .success-title {
-      font-size: 2rem;
-    }
-
-    .success-subtitle {
-      font-size: 1rem;
+  .preview-header {
+    .page-title {
+      font-size: 1.75rem;
     }
   }
 
-  .details-card mat-card-content {
-    padding: 24px;
-
-    .confirmation-grid {
-      grid-template-columns: 1fr;
+  .room-section .room-detail-card {
+    .room-image-large {
+      height: 250px;
     }
 
-    .room-summary {
-      flex-direction: column;
+    .room-info {
+      padding: 24px;
 
-      .room-image {
-        width: 100%;
-        height: 200px;
+      .room-title {
+        font-size: 1.75rem;
       }
     }
-
-    .booking-info .info-row {
-      grid-template-columns: 1fr;
-    }
-
-    .actions {
-      flex-direction: column;
-    }
-  }
-
-  .info-cards {
-    grid-template-columns: 1fr;
   }
 }
 
 </style>
-<div class="success-page" *ngIf="booking && invoice">
-  <div class="success-container">
-    <!-- Success Animation -->
-    <div class="success-animation">
-      <div class="checkmark-circle">
-        <mat-icon class="checkmark">check_circle</mat-icon>
-      </div>
-      <h1 class="success-title">Payment Successful!</h1>
-      <p class="success-subtitle">Your booking has been confirmed</p>
+<div class="room-preview" *ngIf="room && booking">
+  <div class="preview-container">
+    <!-- Header -->
+    <div class="preview-header">
+      <button mat-icon-button class="back-btn" (click)="goBack()">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+      <h1 class="page-title">Booking Preview</h1>
     </div>
 
-    <!-- Booking Details Card -->
-    <mat-card class="details-card">
-      <mat-card-header>
-        <mat-card-title>Booking Confirmation</mat-card-title>
-      </mat-card-header>
-
-      <mat-card-content>
-        <div class="confirmation-grid">
-          <div class="confirmation-item highlight">
-            <mat-icon>confirmation_number</mat-icon>
-            <div class="item-content">
-              <span class="label">Booking ID</span>
-              <span class="value">{{ booking.bookingId }}</span>
-            </div>
+    <div class="preview-content">
+      <!-- Room Details Section -->
+      <div class="room-section">
+        <mat-card class="room-detail-card">
+          <div class="room-image-large">
+            <img [src]="room.image" [alt]="room.name">
+            <div class="room-type-overlay">{{ room.roomType }}</div>
           </div>
 
-          <div class="confirmation-item highlight">
-            <mat-icon>receipt</mat-icon>
-            <div class="item-content">
-              <span class="label">Invoice Number</span>
-              <span class="value">{{ invoice.invoiceNumber }}</span>
-            </div>
-          </div>
-        </div>
+          <mat-card-content class="room-info">
+            <h2 class="room-title">{{ room.name }}</h2>
+            <p class="room-desc">{{ room.description }}</p>
 
-        <div class="room-summary">
-          <img [src]="booking.room.image" [alt]="booking.room.name" class="room-image">
-          <div class="room-details">
-            <h3 class="room-name">{{ booking.room.name }}</h3>
-            <p class="room-type">{{ booking.room.roomType }} Room</p>
-            <div class="room-specs">
-              <span><mat-icon>king_bed</mat-icon> {{ booking.room.bedType }}</span>
-              <span><mat-icon>square_foot</mat-icon> {{ booking.room.size }}</span>
-            </div>
-          </div>
-        </div>
+            <div class="specs-grid">
+              <div class="spec-item">
+                <mat-icon>king_bed</mat-icon>
+                <div class="spec-content">
+                  <span class="spec-label">Bed Type</span>
+                  <span class="spec-value">{{ room.bedType }}</span>
+                </div>
+              </div>
 
-        <div class="booking-info">
-          <div class="info-row">
-            <div class="info-item">
-              <mat-icon>calendar_today</mat-icon>
-              <div class="info-content">
-                <span class="label">Check-in</span>
-                <span class="value">{{ formatDate(booking.checkIn) }}</span>
-                <span class="time">After 3:00 PM</span>
+              <div class="spec-item">
+                <mat-icon>square_foot</mat-icon>
+                <div class="spec-content">
+                  <span class="spec-label">Room Size</span>
+                  <span class="spec-value">{{ room.size }}</span>
+                </div>
+              </div>
+
+              <div class="spec-item">
+                <mat-icon>people</mat-icon>
+                <div class="spec-content">
+                  <span class="spec-label">Capacity</span>
+                  <span class="spec-value">{{ room.maxAdults }} Adults, {{ room.maxChildren }} Children</span>
+                </div>
+              </div>
+
+              <div class="spec-item">
+                <mat-icon>attach_money</mat-icon>
+                <div class="spec-content">
+                  <span class="spec-label">Price per Night</span>
+                  <span class="spec-value">${{ room.price }}</span>
+                </div>
               </div>
             </div>
 
-            <div class="info-item">
-              <mat-icon>calendar_today</mat-icon>
-              <div class="info-content">
-                <span class="label">Check-out</span>
-                <span class="value">{{ formatDate(booking.checkOut) }}</span>
-                <span class="time">Before 11:00 AM</span>
+            <mat-divider class="divider"></mat-divider>
+
+            <div class="amenities-section">
+              <h3 class="amenities-title">Amenities & Features</h3>
+              <div class="amenities-grid">
+                <div class="amenity-item" *ngFor="let amenity of room.amenities">
+                  <mat-icon>check_circle</mat-icon>
+                  <span>{{ amenity }}</span>
+                </div>
               </div>
             </div>
-          </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
 
-          <div class="info-row">
-            <div class="info-item">
-              <mat-icon>nightlight</mat-icon>
-              <div class="info-content">
-                <span class="label">Duration</span>
-                <span class="value">{{ booking.nights }} {{ booking.nights === 1 ? 'Night' : 'Nights' }}</span>
-              </div>
-            </div>
+      <!-- Booking Summary Section -->
+      <div class="summary-section">
+        <mat-card class="summary-card">
+          <mat-card-header>
+            <mat-card-title>Booking Summary</mat-card-title>
+          </mat-card-header>
 
-            <div class="info-item">
-              <mat-icon>people</mat-icon>
-              <div class="info-content">
-                <span class="label">Guests</span>
-                <span class="value">{{ booking.adults }} Adults, {{ booking.children }} Children</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="payment-summary">
-          <h3 class="summary-title">Payment Summary</h3>
-          <div class="summary-rows">
+          <mat-card-content class="summary-content">
             <div class="summary-row">
-              <span>Room Charges</span>
-              <span>${{ booking.totalPrice }}</span>
+              <span class="label">Check-in</span>
+              <span class="value">{{ formatDate(booking.checkIn) }}</span>
             </div>
+
             <div class="summary-row">
-              <span>Taxes & Fees</span>
-              <span>$0</span>
+              <span class="label">Check-out</span>
+              <span class="value">{{ formatDate(booking.checkOut) }}</span>
             </div>
-            <div class="summary-row total">
-              <span>Total Paid</span>
-              <span>${{ booking.totalPrice }}</span>
+
+            <div class="summary-row highlight">
+              <span class="label">Number of Nights</span>
+              <span class="value">{{ booking.nights }} {{ booking.nights === 1 ? 'Night' : 'Nights' }}</span>
             </div>
-          </div>
-          <div class="payment-info">
-            <mat-icon>credit_card</mat-icon>
-            <div class="payment-details">
-              <span class="method">Credit Card</span>
-              <span class="date">{{ formatDate(paymentDate) }} at {{ formatTime(paymentDate) }}</span>
+
+            <mat-divider class="divider"></mat-divider>
+
+            <div class="summary-row">
+              <span class="label">Adults</span>
+              <span class="value">{{ booking.adults }}</span>
             </div>
-          </div>
-        </div>
 
-        <div class="guest-info" *ngIf="booking.customerName">
-          <h3 class="info-title">Guest Information</h3>
-          <div class="guest-details">
-            <div class="guest-item">
-              <mat-icon>person</mat-icon>
-              <span>{{ booking.customerName }}</span>
+            <div class="summary-row">
+              <span class="label">Children</span>
+              <span class="value">{{ booking.children }}</span>
             </div>
-            <div class="guest-item" *ngIf="booking.customerEmail">
-              <mat-icon>email</mat-icon>
-              <span>{{ booking.customerEmail }}</span>
+
+            <mat-divider class="divider"></mat-divider>
+
+            <div class="price-breakdown">
+              <div class="breakdown-row">
+                <span class="label">Room Rate</span>
+                <span class="value">${{ room.price }} × {{ booking.nights }}</span>
+              </div>
+
+              <div class="breakdown-row">
+                <span class="label">Subtotal</span>
+                <span class="value">${{ booking.totalPrice }}</span>
+              </div>
+
+              <div class="breakdown-row">
+                <span class="label">Taxes & Fees</span>
+                <span class="value">$0</span>
+              </div>
             </div>
-            <div class="guest-item" *ngIf="booking.customerPhone">
-              <mat-icon>phone</mat-icon>
-              <span>{{ booking.customerPhone }}</span>
+
+            <mat-divider class="divider-bold"></mat-divider>
+
+            <div class="total-row">
+              <span class="label">Total Amount</span>
+              <span class="value">${{ booking.totalPrice }}</span>
             </div>
-          </div>
-        </div>
 
-        <div class="actions">
-          <button mat-raised-button color="primary" class="download-btn" (click)="downloadInvoice()">
-            <mat-icon>download</mat-icon>
-            Download Invoice
-          </button>
-          <button mat-stroked-button class="home-btn" (click)="goHome()">
-            <mat-icon>home</mat-icon>
-            Back to Home
-          </button>
-        </div>
+            <button mat-raised-button color="primary" class="proceed-btn" (click)="proceedToPayment()">
+              Proceed to Payment
+              <mat-icon>arrow_forward</mat-icon>
+            </button>
 
-        <div class="confirmation-message">
-          <mat-icon>email</mat-icon>
-          <p>A confirmation email has been sent to {{ booking.customerEmail || 'your email address' }}</p>
-        </div>
-      </mat-card-content>
-    </mat-card>
+            <div class="info-note">
+              <mat-icon>info</mat-icon>
+              <p>Your booking is not confirmed until payment is complete</p>
+            </div>
+          </mat-card-content>
+        </mat-card>
 
-    <!-- Additional Info -->
-    <div class="info-cards">
-      <mat-card class="info-card">
-        <mat-icon>local_parking</mat-icon>
-        <h4>Free Parking</h4>
-        <p>Complimentary valet parking for all guests</p>
-      </mat-card>
+        <!-- Additional Info Card -->
+        <mat-card class="info-card">
+          <mat-card-content>
+            <div class="info-item">
+              <mat-icon>verified</mat-icon>
+              <div class="info-text">
+                <h4>Free Cancellation</h4>
+                <p>Cancel up to 24 hours before check-in</p>
+              </div>
+            </div>
 
-      <mat-card class="info-card">
-        <mat-icon>wifi</mat-icon>
-        <h4>High-Speed WiFi</h4>
-        <p>Stay connected with unlimited internet</p>
-      </mat-card>
+            <div class="info-item">
+              <mat-icon>schedule</mat-icon>
+              <div class="info-text">
+                <h4>Flexible Check-in</h4>
+                <p>Check-in: 3:00 PM | Check-out: 11:00 AM</p>
+              </div>
+            </div>
 
-      <mat-card class="info-card">
-        <mat-icon>restaurant</mat-icon>
-        <h4>Breakfast Included</h4>
-        <p>Complimentary gourmet breakfast buffet</p>
-      </mat-card>
+            <div class="info-item">
+              <mat-icon>support_agent</mat-icon>
+              <div class="info-text">
+                <h4>24/7 Support</h4>
+                <p>Our team is always here to help</p>
+              </div>
+            </div>
+          </mat-card-content>
+        </mat-card>
+      </div>
     </div>
   </div>
 </div>
@@ -671,72 +592,70 @@
 <!--ts file  -->
 <div>import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
+import { MatChipsModule } from '@angular/material/chips';
+import { MatDividerModule } from '@angular/material/divider';
+import { RoomService } from '../../services/room.service';
 import { BookingService } from '../../services/booking.service';
-import { InvoiceService } from '../../services/invoice.service';
-import { Booking, Invoice } from '../../models/room.model';
+import { Room, Booking } from '../../models/room.model';
 
 @Component({
-  selector: 'app-payment-success',
+  selector: 'app-room-preview',
   standalone: true,
   imports: [
     CommonModule,
     MatCardModule,
     MatButtonModule,
-    MatIconModule
+    MatIconModule,
+    MatChipsModule,
+    MatDividerModule
   ],
-  templateUrl: './payment-success.component.html',
-  styleUrls: ['./payment-success.component.scss']
+  templateUrl: './room-preview.component.html',
+  styleUrls: ['./room-preview.component.scss']
 })
-export class PaymentSuccessComponent implements OnInit {
+export class RoomPreviewComponent implements OnInit {
+  room: Room | null = null;
   booking: Booking | null = null;
-  invoice: Invoice | null = null;
-  paymentDate = new Date();
 
   constructor(
-    private bookingService: BookingService,
-    private invoiceService: InvoiceService,
-    private router: Router
+    private route: ActivatedRoute,
+    private router: Router,
+    private roomService: RoomService,
+    private bookingService: BookingService
   ) {}
 
   ngOnInit(): void {
-    this.booking = this.bookingService.getCurrentBooking();
+    const roomId = this.route.snapshot.paramMap.get('id');
+    
+    if (roomId) {
+      this.room = this.roomService.getRoomById(roomId) || null;
+      this.booking = this.bookingService.getCurrentBooking();
 
-    if (!this.booking) {
+      if (!this.booking || !this.room) {
+        this.router.navigate(['/']);
+      }
+    } else {
       this.router.navigate(['/']);
-      return;
-    }
-
-    this.invoice = this.invoiceService.generateInvoice(this.booking);
-  }
-
-  downloadInvoice(): void {
-    if (this.invoice) {
-      this.invoiceService.downloadInvoice(this.invoice);
     }
   }
 
-  goHome(): void {
-    this.bookingService.clearBooking();
+  proceedToPayment(): void {
+    this.router.navigate(['/payment']);
+  }
+
+  goBack(): void {
     this.router.navigate(['/']);
   }
 
   formatDate(date: Date): string {
     return new Date(date).toLocaleDateString('en-US', {
-      weekday: 'long',
+      weekday: 'short',
       year: 'numeric',
-      month: 'long',
+      month: 'short',
       day: 'numeric'
-    });
-  }
-
-  formatTime(date: Date): string {
-    return new Date(date).toLocaleTimeString('en-US', {
-      hour: '2-digit',
-      minute: '2-digit'
     });
   }
 }
