@@ -4,7 +4,7 @@ import { Code, Laptop, Cloud, Mouse, ArrowDownward } from '@mui/icons-material';
 import Storage from "@mui/icons-material/Storage";
 // import LogIn from '../LogIn/LogIn';
 import { Link } from 'react-router-dom';
-// import snipted from './sni.html?raw';
+import snipted from './sni.html?raw';
 
 const GlowingOrb = ({ delay = 0, color1, color2, size = 200 }) => (
   <div 
@@ -180,21 +180,21 @@ const LandingPage = () => {
             Connect with creators and explore diverse projects in our vibrant community. 
           </p>
 
-            {/* <pre className="text-sm text-gray-200 bg-black/40 p-4 rounded-lg overflow-x-auto">
+            <pre className="text-sm text-gray-200 bg-black/40 p-4 rounded-lg overflow-x-auto">
     <code>{snipted}</code>
-  </pre> */}
+  </pre> 
           <div 
             className={`flex gap-6 justify-center transition-all duration-1000 delay-500 ${
               mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
             }`}
           >
-            {/* <Button 
+             <Button 
               variant="contained" 
               className="bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 
                 text-white px-8 py-3 transform hover:scale-105 transition-all duration-300"
             >
               Get Started
-            </Button> */}
+            </Button> 
            <Link to="/home"> <Button 
               variant="outlined" 
               className="border-purple-400 text-purple-400 hover:bg-purple-400/10 px-8 py-3
