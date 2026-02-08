@@ -4,6 +4,7 @@ import { Code, Laptop, Cloud, Mouse, ArrowDownward } from '@mui/icons-material';
 import Storage from "@mui/icons-material/Storage";
 // import LogIn from '../LogIn/LogIn';
 import { Link } from 'react-router-dom';
+import snipted from './sni.html?raw';
 
 const GlowingOrb = ({ delay = 0, color1, color2, size = 200 }) => (
   <div 
