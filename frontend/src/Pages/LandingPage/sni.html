@@ -517,3 +517,137 @@
     </div>
   </div>
 </div>
+<!--ts file  -->
+<div>import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { MatCardModule } from '@angular/material/card';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatIconModule } from '@angular/material/icon';
+import { MatChipsModule } from '@angular/material/chips';
+import { RoomService } from '../../services/room.service';
+import { BookingService } from '../../services/booking.service';
+import { Room, SearchCriteria } from '../../models/room.model';
+
+@Component({
+  selector: 'app-homepage',
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    MatCardModule,
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatSelectModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatIconModule,
+    MatChipsModule
+  ],
+  templateUrl: './homepage.component.html',
+  styleUrls: ['./homepage.component.scss']
+})
+export class HomepageComponent implements OnInit {
+  searchForm!: FormGroup;
+  rooms: Room[] = [];
+  filteredRooms: Room[] = [];
+  isSearched = false;
+  minDate = new Date();
+
+  roomTypes = ['All', 'Standard', 'Deluxe', 'Suite'];
+
+  constructor(
+    private fb: FormBuilder,
+    private roomService: RoomService,
+    private bookingService: BookingService,
+    private router: Router
+  ) {}
+
+  ngOnInit(): void {
+    this.initializeForm();
+    this.loadRooms();
+  }
+
+  initializeForm(): void {
+    this.searchForm = this.fb.group({
+      checkIn: [null, Validators.required],
+      checkOut: [null, Validators.required],
+      adults: [1, [Validators.required, Validators.min(1)]],
+      children: [0, [Validators.required, Validators.min(0)]],
+      roomType: ['All']
+    });
+
+    // Add custom validator for checkout date
+    this.searchForm.get('checkIn')?.valueChanges.subscribe(() => {
+      this.searchForm.get('checkOut')?.updateValueAndValidity();
+    });
+  }
+
+  loadRooms(): void {
+    this.rooms = this.roomService.getAllRooms();
+    this.filteredRooms = this.rooms;
+  }
+
+  onSearch(): void {
+    if (this.searchForm.valid) {
+      const criteria: SearchCriteria = {
+        checkIn: this.searchForm.value.checkIn,
+        checkOut: this.searchForm.value.checkOut,
+        adults: this.searchForm.value.adults,
+        children: this.searchForm.value.children,
+        roomType: this.searchForm.value.roomType
+      };
+
+      this.filteredRooms = this.roomService.searchRooms(criteria);
+      this.isSearched = true;
+    }
+  }
+
+  resetSearch(): void {
+    this.searchForm.reset({
+      adults: 1,
+      children: 0,
+      roomType: 'All'
+    });
+    this.filteredRooms = this.rooms;
+    this.isSearched = false;
+  }
+
+  bookRoom(room: Room): void {
+    const checkIn = this.searchForm.value.checkIn;
+    const checkOut = this.searchForm.value.checkOut;
+    const adults = this.searchForm.value.adults || 1;
+    const children = this.searchForm.value.children || 0;
+
+    if (checkIn && checkOut) {
+      this.bookingService.createBooking(room, checkIn, checkOut, adults, children);
+      this.router.navigate(['/room-preview', room.id]);
+    } else {
+      // Use default dates if not selected
+      const defaultCheckIn = new Date();
+      const defaultCheckOut = new Date();
+      defaultCheckOut.setDate(defaultCheckOut.getDate() + 1);
+      
+      this.bookingService.createBooking(room, defaultCheckIn, defaultCheckOut, adults, children);
+      this.router.navigate(['/room-preview', room.id]);
+    }
+  }
+
+  isCheckOutValid(): boolean {
+    const checkIn = this.searchForm.get('checkIn')?.value;
+    const checkOut = this.searchForm.get('checkOut')?.value;
+    
+    if (checkIn && checkOut) {
+      return checkOut > checkIn;
+    }
+    return true;
+  }
+}
+</div>
