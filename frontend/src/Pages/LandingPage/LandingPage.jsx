@@ -4,7 +4,148 @@ import { Code, Laptop, Cloud, Mouse, ArrowDownward } from '@mui/icons-material';
 import Storage from "@mui/icons-material/Storage";
 // import LogIn from '../LogIn/LogIn';
 import { Link } from 'react-router-dom';
+const snipted = `<div class="homepage">
+  <!-- Hero Section -->
+  <div class="hero-section">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1 class="hero-title">Experience Luxury Redefined</h1>
+      <p class="hero-subtitle">Discover unparalleled comfort in the heart of elegance</p>
+    </div>
+  </div>
 
+  <!-- Search Section -->
+  <div class="search-container">
+    <div class="search-wrapper">
+      <h2 class="search-title">Find Your Perfect Stay</h2>
+      
+      <form [formGroup]="searchForm" class="search-form">
+        <div class="form-grid">
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Check-in</mat-label>
+            <input matInput [matDatepicker]="pickerIn" formControlName="checkIn" [min]="minDate">
+            <mat-datepicker-toggle matIconSuffix [for]="pickerIn"></mat-datepicker-toggle>
+            <mat-datepicker #pickerIn></mat-datepicker>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Check-out</mat-label>
+            <input matInput [matDatepicker]="pickerOut" formControlName="checkOut" [min]="searchForm.get('checkIn')?.value || minDate">
+            <mat-datepicker-toggle matIconSuffix [for]="pickerOut"></mat-datepicker-toggle>
+            <mat-datepicker #pickerOut></mat-datepicker>
+            <mat-error *ngIf="!isCheckOutValid()">Check-out must be after check-in</mat-error>
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Adults</mat-label>
+            <input matInput type="number" formControlName="adults" min="1">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Children</mat-label>
+            <input matInput type="number" formControlName="children" min="0">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="form-field">
+            <mat-label>Room Type</mat-label>
+            <mat-select formControlName="roomType">
+              <mat-option *ngFor="let type of roomTypes" [value]="type">
+                {{ type }}
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <div class="search-actions">
+            <button mat-raised-button color="primary" class="search-btn" 
+                    (click)="onSearch()" 
+                    [disabled]="!searchForm.valid || !isCheckOutValid()">
+              <mat-icon>search</mat-icon>
+              Search Rooms
+            </button>
+            <button mat-stroked-button class="reset-btn" (click)="resetSearch()" *ngIf="isSearched">
+              <mat-icon>refresh</mat-icon>
+              Reset
+            </button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Results Section -->
+  <div class="rooms-section">
+    <div class="section-header">
+      <h2 class="section-title">
+        {{ isSearched ? 'Available Rooms' : 'Our Exquisite Rooms' }}
+      </h2>
+      <p class="section-subtitle" *ngIf="!isSearched">
+        Choose from our carefully curated selection of luxury accommodations
+      </p>
+    </div>
+
+    <div class="rooms-grid" *ngIf="filteredRooms.length > 0">
+      <mat-card class="room-card" *ngFor="let room of filteredRooms">
+        <div class="room-image-container">
+          <img [src]="room.image" [alt]="room.name" class="room-image">
+          <div class="room-type-badge">{{ room.roomType }}</div>
+        </div>
+        
+        <mat-card-content class="room-content">
+          <h3 class="room-name">{{ room.name }}</h3>
+          <p class="room-description">{{ room.description }}</p>
+          
+          <div class="room-details">
+            <div class="detail-item">
+              <mat-icon>king_bed</mat-icon>
+              <span>{{ room.bedType }}</span>
+            </div>
+            <div class="detail-item">
+              <mat-icon>square_foot</mat-icon>
+              <span>{{ room.size }}</span>
+            </div>
+            <div class="detail-item">
+              <mat-icon>people</mat-icon>
+              <span>{{ room.maxAdults }} Adults, {{ room.maxChildren }} Children</span>
+            </div>
+          </div>
+
+          <div class="amenities">
+            <mat-chip-set>
+              <mat-chip *ngFor="let amenity of room.amenities.slice(0, 3)">
+                {{ amenity }}
+              </mat-chip>
+              <mat-chip *ngIf="room.amenities.length > 3" class="more-chip">
+                +{{ room.amenities.length - 3 }} more
+              </mat-chip>
+            </mat-chip-set>
+          </div>
+
+          <div class="room-footer">
+            <div class="price-section">
+              <span class="price-label">From</span>
+              <span class="price">${{ room.price }}</span>
+              <span class="price-suffix">/ night</span>
+            </div>
+            <button mat-raised-button color="primary" class="book-btn" (click)="bookRoom(room)">
+              Book Now
+              <mat-icon>arrow_forward</mat-icon>
+            </button>
+          </div>
+        </mat-card-content>
+      </mat-card>
+    </div>
+
+    <div class="no-results" *ngIf="filteredRooms.length === 0 && isSearched">
+      <mat-icon class="no-results-icon">hotel</mat-icon>
+      <h3>No Rooms Available</h3>
+      <p>We couldn't find any rooms matching your criteria. Please try different dates or room type.</p>
+      <button mat-raised-button color="primary" (click)="resetSearch()">
+        View All Rooms
+      </button>
+    </div>
+  </div>
+</div>
+`
 const GlowingOrb = ({ delay = 0, color1, color2, size = 200 }) => (
   <div 
     className="absolute rounded-full animate-pulse blur-xl opacity-20"
@@ -176,7 +317,7 @@ const LandingPage = () => {
               mounted ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'
             }`}
           >
-            Connect with creators and explore diverse projects in our vibrant community.
+            Connect with creators and explore diverse projects in our vibrant community. {snipted}
           </p>
           <div 
             className={`flex gap-6 justify-center transition-all duration-1000 delay-500 ${
